@@ -1,10 +1,19 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 from tkinter import *
+from tkinter import messagebox
 
 
 window = tk.Tk()
 window.configure(background="#0b032d", height=600, width=800)
+window.resizable(False,False)
+#===============Variable========
+entry1 = StringVar()
+entry2 = StringVar()
+entry3 = StringVar()
+radiobutton = StringVar()
+checkbutton = IntVar()
+#===============Properties========
 label1 = ttk.Label(window)
 label1.configure(
     background="#0b032d",
@@ -22,9 +31,9 @@ label3.configure(
     text='Nama: *')
 label3.place(anchor="nw", relx=0.0, rely=0.0, x=150, y=70)
 entry1 = ttk.Entry(window)
-_text_ = 'First name'
+_text1_ = 'First name'
 entry1.delete("0", "end")
-entry1.insert("0", _text_)
+entry1.insert("0", _text1_)
 entry1.place(
     anchor="nw",
     height=30,
@@ -35,9 +44,9 @@ entry1.place(
     x=150,
     y=100)
 entry2 = ttk.Entry(window)
-_text_ = 'Last name'
+_text2_ = 'Last name'
 entry2.delete("0", "end")
-entry2.insert("0", _text_)
+entry2.insert("0", _text2_)
 entry2.place(
     anchor="nw",
     height=30,
@@ -56,9 +65,9 @@ label4.configure(
     text='Email: *')
 label4.place(anchor="nw", relx=0.0, rely=0.0, x=150, y=140)
 entry3 = ttk.Entry(window)
-_text_ = '@gmail.com'
+_text3_ = '@gmail.com'
 entry3.delete("0", "end")
-entry3.insert("0", _text_)
+entry3.insert("0", _text3_)
 entry3.place(
     anchor="nw",
     height=30,
@@ -77,10 +86,10 @@ label5.configure(
     text='Jenis Kelamin: *')
 label5.place(anchor="nw", relx=0.0, rely=0.0, x=150, y=210)
 radiobutton1 = tk.Radiobutton(window)
-radiobutton1.configure(text='Wanita', value="wanita", bg='#0b032d',fg='#ffffff')
+radiobutton1.configure(text='Wanita',variable = radiobutton, value="Wanita")
 radiobutton1.place(anchor="nw", width=100, x=150, y=240)
 radiobutton2 = tk.Radiobutton(window)
-radiobutton2.configure(text='Pria', value="pria", bg='#0b032d',fg='#ffffff')
+radiobutton2.configure(text='Pria',variable = radiobutton, value="Pria")
 radiobutton2.place(anchor="nw", width=100, x=290, y=240)
 label6 = ttk.Label(window)
 label6.configure(
@@ -125,14 +134,42 @@ entry4 = ttk.Entry(window)
 entry4.place(anchor="nw", height=50, width=430, x=150, y=430)
 checkbutton1 = tk.Checkbutton(window)
 checkbutton1.configure(
-    offvalue="no",
-    onvalue="yes",
-    text='Privacy & Condition*',
-    bg='#0b032d',
-    fg='#ffffff')
+    variable=checkbutton,
+    offvalue=0,
+    onvalue=1,
+    text='Privacy & Condition*')
 checkbutton1.place(anchor="nw", x=150, y=490)
+
+def __entry():
+    if entry1.get() == "" or entry2.get() == "" or entry3.get() == "":
+        tk.messagebox.showwarning(title='PERHATIAN', message='Field nama kosong')
+    elif entry1.get() == _text1_ or entry2.get() == _text2_ or entry3.get() == _text3_ :
+        tk.messagebox.showwarning(title='PERHATIAN', message='Field harus diisi')
+    elif entry1.get().isnumeric() is True or entry2.get().isnumeric() is True or entry3.get().isnumeric() is True:
+        tk.messagebox.showwarning(title='PERHATIAN', message='Field harus diisi dengan benar')    
+    elif combobox2.get() == "" or combobox2.get().isnumeric() is True:
+        tk.messagebox.showwarning(title='PERHATIAN', message='Field universitas diisi dengan benar')
+    elif entry4.get() == "" or entry4.get().isnumeric() is True:
+        tk.messagebox.showwarning(title='PERHATIAN', message='Field alamat diisi dengan benar')
+    else:
+        tk.messagebox.showinfo(title='PERHATIAN',message='Data berhasil tersimpan')
+        window = tk.Tk()
+        window.configure(background="#0b032d", height=600, width=800)
+        textarea = tk.Text(window)
+        textarea.place(anchor="nw", relx=0.0, rely=0.0, x=20, y=30, height=600, width=800)
+        textarea.insert(END,f"\n\n {entry1.get()}")
+        textarea.insert(END,f"\n\n {entry2.get()}")
+        textarea.insert(END,f"\n\n {entry3.get()}")
+        textarea.insert(END,f"\n\n {radiobutton.get()}")
+        textarea.insert(END,f"\n\n {combobox2.get()}")
+        textarea.insert(END,f"\n\n {spinbox1.get()}")
+        textarea.insert(END,f"\n\n {spinbox2.get()}")
+        textarea.insert(END,f"\n\n {spinbox3.get()}")
+        textarea.insert(END,f"\n\n {entry4.get()}")
+        #textarea.insert(END,f"\n\n {checkbutton.get()}")
+        return
 button1 = tk.Button(window)
-button1.configure(text='Save', bg='#596475', fg='#ffffff', font="{Montserrat Medium} 10 {}")
+button1.configure(text='Save', command=__entry, bg='#596475', fg='#ffffff', font="{Montserrat Medium} 10 {}")
 button1.place(anchor="nw", height=30, width=215, x=265, y=530)
 
 window.mainloop()
