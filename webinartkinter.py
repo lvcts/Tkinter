@@ -5,6 +5,7 @@ from tkinter import messagebox
 
 
 window = tk.Tk()
+window.title("Webinar Registration")
 window.configure(background="#0b032d", height=600, width=800)
 window.resizable(False,False)
 #===============Variable========
@@ -148,24 +149,25 @@ def __entry():
     elif entry1.get().isnumeric() is True or entry2.get().isnumeric() is True or entry3.get().isnumeric() is True:
         tk.messagebox.showwarning(title='PERHATIAN', message='Field harus diisi dengan benar')    
     elif combobox2.get() == "" or combobox2.get().isnumeric() is True:
-        tk.messagebox.showwarning(title='PERHATIAN', message='Field universitas diisi dengan benar')
+        tk.messagebox.showwarning(title='PERHATIAN', message='Field universitas mohon diisi dengan benar')
     elif entry4.get() == "" or entry4.get().isnumeric() is True:
-        tk.messagebox.showwarning(title='PERHATIAN', message='Field alamat diisi dengan benar')
+        tk.messagebox.showwarning(title='PERHATIAN', message='Field alamat mohon diisi dengan benar')
+    elif radiobutton.get() == "":
+        tk.messagebox.showwarning(title='PERHATIAN', message='Field Jenis Kelamin mohon diisi dengan benar')
     else:
         tk.messagebox.showinfo(title='PERHATIAN',message='Data berhasil tersimpan')
         window = tk.Tk()
+        window.title("Data Registration")
         window.configure(background="#0b032d", height=600, width=800)
         textarea = tk.Text(window)
-        textarea.place(anchor="nw", relx=0.0, rely=0.0, x=20, y=30, height=600, width=800)
-        textarea.insert(END,f"\n\n {entry1.get()}")
-        textarea.insert(END,f"\n\n {entry2.get()}")
-        textarea.insert(END,f"\n\n {entry3.get()}")
-        textarea.insert(END,f"\n\n {radiobutton.get()}")
-        textarea.insert(END,f"\n\n {combobox2.get()}")
-        textarea.insert(END,f"\n\n {spinbox1.get()}")
-        textarea.insert(END,f"\n\n {spinbox2.get()}")
-        textarea.insert(END,f"\n\n {spinbox3.get()}")
-        textarea.insert(END,f"\n\n {entry4.get()}")
+        textarea.place(anchor="nw", relx=0.0, rely=0.0, x=50, y=50, height=500, width=700)
+        textarea.insert(END,f"\n\n First Name: \t\t {entry1.get()}")
+        textarea.insert(END,f"\n\n Last Name:\t\t {entry2.get()}")
+        textarea.insert(END,f"\n\n Email:\t\t{entry3.get()}")
+        textarea.insert(END,f"\n\n Gender:\t\t{radiobutton.get()}")
+        textarea.insert(END,f"\n\n University:\t\t{combobox2.get()}")
+        textarea.insert(END,f"\n\n Born Date:\t\t{spinbox1.get()}-{spinbox2.get()}-{spinbox3.get()}")
+        textarea.insert(END,f"\n\n Address:\t\t{entry4.get()}")
         #textarea.insert(END,f"\n\n {checkbutton.get()}")
         return
 button1 = tk.Button(window)
